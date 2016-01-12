@@ -5,13 +5,23 @@ def word_frequency(file_name):
 
     dict_word = {}
 
+    punctuations_to_remove = [',', '.', '!', '?', '-', '--', 
+                              '/', '\\', ':', '"', ';', '_']
+
     for line in data_file:
-        
-        
+
+
         line = line.rstrip()
         words = line.split(" ")
+
+        cleaned_words = []
+
+        for word in words:
+            for symbol in punctuations_to_remove:
+                word = word.strip(symbol)
+            cleaned_words.append(word)
         
-        lower_words = [word.lower() for word in words]
+        lower_words = [word.lower() for word in cleaned_words]
 
         # lower_words = []
         # for word in words:
@@ -30,6 +40,6 @@ def word_frequency(file_name):
     data_file.close()
 
 word_frequency("test.txt")
-# word_frequency("twain.txt")
+word_frequency("twain.txt")
 
 
